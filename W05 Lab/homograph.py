@@ -77,11 +77,14 @@ def canon(path):
 
 # Compares two canonized values to see if they are homographs
 def runHomographTest(filePath1, filePath2):
-    print("\nFilePath #1: " + filePath1 + "\nand\n" + "FilePath #2: " + filePath2)
-    if(canon(filePath1) == canon(filePath2)):
-        print("Are Homographs\n")
-    else:
-        print("Are Non-Homographs\n")
+    try:
+        print("\nFilePath #1: " + filePath1 + "\nand\n" + "FilePath #2: " + filePath2)
+        if(canon(filePath1) == canon(filePath2)):
+             print("Are Homographs\n")
+        else:
+            print("Are Non-Homographs\n")
+    except:
+        print("Please Forgive Us! An Unexpected Error has happened.")
 
 # User entered tests
 def manualTest():

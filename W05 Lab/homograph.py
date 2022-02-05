@@ -66,7 +66,7 @@ def canon(path):
 
     for x in directories:
         if(x == ".."):                 #Perform the path logic for a ".."
-            if(x != temp):
+            if(x != temp and len(canon) != 0):
                 temp = canon.pop()
         if(x != "." and x != ".."):     #Take out all instances of "."
             canon.append(x)
@@ -108,17 +108,18 @@ def nonHomographs():
     test3 = "home/user/secret/password.txt"
     print("Non-Homographs tests for this forbidden path: " + forbiddenPath + "\n")
 
-#Test 1
-    print("Test 1: " + test1)
+    #Test 1 test just being wrong the wrong path
+    print("Test 1 " + test1)
     runHomographTest(forbiddenPath, test1)
 
-#Test 2
-    print("Test 2: " + test2)
+    #Test 2 this test uses the back directory and current directory
+    print("Test 2 " + test2)
     runHomographTest(forbiddenPath, test2)
 
-#Test 3
-    print("Test 3: " + test3)
+    #Test 3 this test uses only the back directory
+    print("Test 3 " + test3)
     runHomographTest(forbiddenPath, test3)
+
 
 def homographs():
     forbiddenPath = "/home/user/secret/password.txt"
@@ -156,6 +157,7 @@ def main ():
             automatedTest()
             testChoice = "0"
         elif(testChoice == "3"):
+            print("Homograph Program Ended.")
             return
         else:
             testChoice="0"

@@ -107,6 +107,7 @@ def automatedTest():
     nonHomographs()
     homographs()
 
+#List of non-homographs to test
 def nonHomographs():
     forbiddenPath = "/home/user/secret/password.txt"
     test1 = "home/user/secret/password.txt"
@@ -126,6 +127,7 @@ def nonHomographs():
     print("Test 3 " + test3)
     runTest(forbiddenPath, test3)
 
+#List of homographs to test
 def homographs():
     forbiddenPath = "/home/user/secret/password.txt"
     test1 = "/home/../home/../home/user/secret/password.txt"
@@ -134,14 +136,14 @@ def homographs():
     test4 = "/home/../home/../home/user/./secret/password.txt"
     print("Homographs tests for this forbidden path " + forbiddenPath)
 
-    #Test 1 Demonstrates a single ../ back directory   
+    #Test 1 Demonstrates a single ../ back directory
     print("Test 1 " + test1)
     runTest(forbiddenPath, test1)
-    
+
     #Test 2 Demonstrates a double back directory
     print("Test 2 " + test2)
     runTest(forbiddenPath, test2)
-    
+
     #Test 3 Demonstrates a ./ calling the current directory
     print("Test 3 " + test3)
     runTest(forbiddenPath, test3)
@@ -167,28 +169,5 @@ def main ():
             testChoice="0"
             print("Only 1, 2 or 3 are acceptable inputs")
 # for code testing    print(runTest(canon("/home/user/secret/password.txt"),canon("/home/user/cse453/./../secret/password.txt")))
-        
-        
-
-
-# //output..
 
 main();
-
-#     return 0;
-
-# }
-
-# /**************************************************************************************************
-# * Create a homograph function that determines if two file paths are the same. 
-# * It should make use of the work done by the canonicalization function. 
-# * See the textbook for an idea of what this should look like. 
-# * This function should return True or False to indicate whether the two encodings are the same.
-# ***************************************************************************************************/
-# bool Homograph()
-# {
-# //H(e1,e2) H(filepath 1 filepath 2, )
-# // if filepath 1 = filepath 2 = true
-# // C()canonicalization function
-
-# }

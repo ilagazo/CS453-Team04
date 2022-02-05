@@ -68,7 +68,7 @@ def canon(path):
         if(x == ".."):                 #Perform the path logic for a ".."
             if(x != temp):
                 temp = canon.pop()
-        if(x != "." and x != ".."):     #Take out all instances of .
+        if(x != "." and x != ".."):     #Take out all instances of "."
             canon.append(x)
     for x in range(len(canon)):         # Compile the final canonized result string into a result with slashes
         result += f'{canon[x]}{slash}'

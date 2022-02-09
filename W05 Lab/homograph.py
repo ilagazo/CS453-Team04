@@ -88,8 +88,8 @@ def runHomographTest(filePath1, filePath2):
 
 # User entered tests
 def manualTest():
-    file_1 = ""
-    file_2 = ""
+    filename1 = ""
+    filename2 = ""
 
     print("Specify the first filename: ")
     filename1 = input("> ")

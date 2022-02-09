@@ -19,14 +19,20 @@ def promptUser():
     print("Please enter password:")
     password = input("> ")
 
-    sqlQuery = genQuery(username,password)
-    print(sqlQuery)
+    genQuery(username,password)
 
 
 
 def genQuery(username, password):
     sqlQuery = (f"SELECT authenticate FROM passwordList WHERE name='{username}' and passwd='{password}';")
-    return sqlQuery
+    print(f" SQL Query: {sqlQuery}\n")
+    # return sqlQuery
+
+def testValid():
+    test1 = ["This_1s_A_u5ern4me", "This_1s_A_p455w0rd"]
+
+    print(f"Test 1:\n Username: {test1[0]}\n Password: {test1[1]}")
+    genQuery(test1[0], test1[1])
 
 # PART 02: Vulnerabilities
 # Generate test cases (again, each team member should generate one test case) that demonstrate a tautology attack.
@@ -53,7 +59,21 @@ def genQuery(username, password):
 
 
 def main():
-    promptUser()
+    option = "0"
+    while option == '0':
+        print("Please select an option:\n Enter 1 for manual test\n Enter 2 for automated tests\n Enter 3 to end program execution")
+        option = input("> ")
+        if(option == '1'):
+            promptUser()
+            option = '0'
+        elif(option == '2'):
+            testValid()
+            option = '0'
+        elif(option == '3'):
+            print("SQL Injection Program Ended. Goodbye!")
+        else:
+            option = '0'
+            print("Invalid Input! Please select a valid input (i.e. 1,2,3")
 
 #  Run Main
 main();

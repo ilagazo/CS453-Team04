@@ -1,53 +1,6 @@
 from hmac import compare_digest
 import platform
-
-def sanitizeInput(dirtyInput):
-    cleanedInput = 1
-    return cleanedInput
-
-def manualTest():
-    dirtyUserName = getUserName()
-    dirtyUserPassword = getUserPassword()
-    cleanUserName = sanitizeInput(dirtyUserName)
-    cleanUserPassword = sanitizeInput(dirtyUserPassword)
-
-    print("Pre Cleaned User Name Input " + dirtyUserName)
-    print("Cleaned User Name Input " + cleanUserName)
-
-    print("Pre Cleaned User Password Input" + dirtyUserPassword)
-    print("Cleaned User Password Input" + cleanUserPassword)
-
-def automatedTest():
-    return 1
-
-def getUserName():
-    print("Enter Username: ")
-    userName = input("> ")
-    return userName
-
-def getUserPassword():
-    print("Enter Password: ")
-    userPassword = input("> ")
-    return userPassword
-
-#def main ():
-#    testChoice = "0"
-#    while testChoice == "0":
-        # print("Enter 1 for manual test \n      2 for automated tests \n      3 to stop testing")
-        # testChoice = input("> ")
-        # if(testChoice == "1"):
-        #     manualTest()
-        #     testChoice="0"
-        # elif (testChoice == "2"):
-        #     automatedTest()
-        #     testChoice = "0"
-        # elif(testChoice == "3"):
-        #     return
-        # else:
-        #     testChoice="0"
-        #     print("Only 1, 2 or 3 are acceptable inputs")
-        
-
+    
 # PART 01: Query Generation
 # Write a function to accept two strings (username and a password) and return a single string (SQL) representing
 # the query used to determine if a user is authenticated on a given system. The query will be similar to one
@@ -60,22 +13,17 @@ def getUserPassword():
 # function, and a couple sentences justifying why the test cases provide adequate coverage of the valid input.
 
 def promptUser():
-    username = ""
-    password = ""
+    username = getUserName()
+    password = getUserPassword()
 
-    print("Please enter username:")
-    username = input("> ")
-
-    print("Please enter password:")
-    password = input("> ")
-
+    print()
     genQuery(username,password)
 
 
 
 def genQuery(username, password):
     sqlQuery = (f"SELECT authenticate FROM passwordList WHERE name='{username}' and passwd='{password}';")
-    print(f" SQL Query: {sqlQuery}\n")
+#    print(f" SQL Query: {sqlQuery}\n")
     return sqlQuery
 
 def testValid():
@@ -107,6 +55,33 @@ def testValid():
 # that the valid test cases still work, output showing that all four malicious inputs are mitigated, and a justification
 # the approach works the way one would expect.
 
+def sanitizeInput(dirtyInput):
+    cleanedInput = dirtyInput
+    return cleanedInput
+
+def manualTest():
+    dirtyUserName = getUserName()
+    dirtyUserPassword = getUserPassword()
+    cleanUserName = sanitizeInput(dirtyUserName)
+    cleanUserPassword = sanitizeInput(dirtyUserPassword)
+    dirtyQuery=genQuery(dirtyUserName,dirtyUserPassword)
+    cleanQuery=genQuery(cleanUserName,cleanUserPassword)
+
+    print("Query Before Clean: " + dirtyQuery)
+    print("Query After Clean: " + cleanQuery)
+
+def automatedTest():
+    return 1
+
+def getUserName():
+    print("Please enter username: ")
+    userName = input("> ")
+    return userName
+
+def getUserPassword():
+    print("Enter Password: ")
+    userPassword = input("> ")
+    return userPassword
 
 def main():
     option = "0"
@@ -114,7 +89,7 @@ def main():
         print("Please select an option:\n Enter 1 for manual test\n Enter 2 for automated tests\n Enter 3 to end program execution")
         option = input("> ")
         if(option == '1'):
-            promptUser()
+            manualTest()
             option = '0'
         elif(option == '2'):
             testValid()

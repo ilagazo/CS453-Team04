@@ -26,7 +26,7 @@ def promptUser():
 def genQuery(username, password):
     sqlQuery = (f"SELECT authenticate FROM passwordList WHERE name='{username}' and passwd='{password}';")
     print(f" SQL Query: {sqlQuery}\n")
-    # return sqlQuery
+    return sqlQuery
 
 def testValid():
     test1 = ["This_1s_A_u5ern4me", "This_1s_A_p455w0rd"]

@@ -12,25 +12,10 @@ import platform
 # query function and displays the resulting query. Provide the code in the report, a sample of the output from the
 # function, and a couple sentences justifying why the test cases provide adequate coverage of the valid input.
 
-def promptUser():
-    username = getUserName()
-    password = getUserPassword()
-
-    print()
-    genQuery(username,password)
-
-
-
 def genQuery(username, password):
     sqlQuery = (f"SELECT authenticate FROM passwordList WHERE name='{username}' and passwd='{password}';")
 #    print(f" SQL Query: {sqlQuery}\n")
     return sqlQuery
-
-def testValid():
-    test1 = ["This_1s_A_u5ern4me", "This_1s_A_p455w0rd"]
-
-    print(f"Test 1:\n Username: {test1[0]}\n Password: {test1[1]}")
-    genQuery(test1[0], test1[1])
 
 # PART 02: Vulnerabilities
 # Generate test cases (again, each team member should generate one test case) that demonstrate a tautology attack.
@@ -41,37 +26,93 @@ def testValid():
 # each attack must be demonstrated with a separate set of test cases, a separate function feeding the test cases to
 # the query function, and justification in the lab report.
 
+def testValid():
+    test1 = ["This_1s_A_u5ern4me", "This_1s_A_p455w0rd"]
 
+    print(f"Test 1:\n Username: {test1[0]}\n Password: {test1[1]}")
+    print(genQuery(test1[0], test1[1]))
+
+def shaunTest():
+    #tautology attack
+    #union query attack
+    #additional statement attack
+    #comment attack
+    return 1
+
+def collinTest():
+    #tautology attack
+    #union query attack
+    #additional statement attack
+    #comment attack
+    return 1
+def ivanroTest():
+    #tautology attack
+    #union query attack
+    #additional statement attack
+    #comment attack
+    return 1
+
+def steveTest():
+    #tautology attack
+    #union query attack
+    #additional statement attack
+    #comment attack
+    return 1
+
+def camilaTest():
+    #tautology attack
+    #union query attack
+    #additional statement attack
+    #comment attack
+    return 1
+
+def davanTest():
+    #tautology attack
+    #union query attack
+    #additional statement attack
+    #comment attack
+    return 1
 
 # PART 03: Weak Mitigation
 # Create a function to provide a weak mitigation against all four attacks. This function accepts the input as a parameter
 # (or two!) and returns the sanitized input. In the lab report, provide the code, the output of the various test cases,
 # and justification that the code represents a weak mitigation to the four attack types.
 
-
+def weakMitigation(userName, userPassword):
+    #tautology attack
+    #union query attack
+    #additional statement attack
+    #comment attack
+    return 1
 
 # PART 04: Strong Mitigation
-#Create a function to provide a strong mitigation against all command injection attacks. Provide the code, output showing
+# Create a function to provide a strong mitigation against all command injection attacks. Provide the code, output showing
 # that the valid test cases still work, output showing that all four malicious inputs are mitigated, and a justification
 # the approach works the way one would expect.
 
-def sanitizeInput(dirtyInput):
-    cleanedInput = dirtyInput
-    return cleanedInput
+def strongMitigation(userName, userPassword):
+    #tautology attack
+    #union query attack
+    #additional statement attack
+    #comment attack
+    return 1
 
 def manualTest():
-    dirtyUserName = getUserName()
-    dirtyUserPassword = getUserPassword()
-    cleanUserName = sanitizeInput(dirtyUserName)
-    cleanUserPassword = sanitizeInput(dirtyUserPassword)
-    dirtyQuery=genQuery(dirtyUserName,dirtyUserPassword)
-    cleanQuery=genQuery(cleanUserName,cleanUserPassword)
+    userName = getUserName()
+    userPassword = getUserPassword()
+    
+    weakMitigation(userName, userPassword)
+    strongMitigation(userName, userPassword)
 
-    print("Query Before Clean: " + dirtyQuery)
-    print("Query After Clean: " + cleanQuery)
 
 def automatedTest():
-    return 1
+    testValid()
+    shaunTest()
+    collinTest()
+    ivanroTest()
+    steveTest()
+    camilaTest()    
+    davanTest()
 
 def getUserName():
     print("Please enter username: ")
@@ -92,7 +133,7 @@ def main():
             manualTest()
             option = '0'
         elif(option == '2'):
-            testValid()
+            automatedTest()
             option = '0'
         elif(option == '3'):
             print("SQL Injection Program Ended. Goodbye!")

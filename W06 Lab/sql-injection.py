@@ -40,11 +40,23 @@ def shaunTest():
     return 1
 
 def collinTest():
-    #tautology attack
-    #union query attack
-    #additional statement attack
-    #comment attack
-    return 1
+    # tautology attack 
+    username = "collinbrown32"
+    password = "anything or x=x"
+    weakMitigation(username, password)
+    # union query attack 
+    username = "collinbrown32"
+    password = "UNION DROP TABLE table1;"
+    weakMitigation(username, password)
+    # additional statement attack 
+    username = "collinbrown32;DROP TABLE table1;"
+    password = "trt334"
+    weakMitigation(username, password)
+    # comment attack 
+    username = "collinbrown32#"
+    password = "DROP TABLE table1;"
+    weakMitigation(username, password)
+    return 1 
 def ivanroTest():
     #tautology attack
     #union query attack
@@ -79,10 +91,11 @@ def davanTest():
 # and justification that the code represents a weak mitigation to the four attack types.
 
 def weakMitigation(userName, userPassword):
-    #tautology attack
-    #union query attack
-    #additional statement attack
-    #comment attack
+    forbidden = ["OR", "or", "AND", "and", "=", "UNION", "union", ";", "/", "#", "@", "$", "~"] #List of dangerous characters
+    for i in forbidden:
+        if(i in userName or i in userPassword):
+            print(f"Invalid input from user {userName}, use of {i} not permitted.") #Loops through user input, checking for the forbidden characters. If found, prints "Invalid"
+
     print(genQuery(userName, userPassword))
 
 # PART 04: Strong Mitigation

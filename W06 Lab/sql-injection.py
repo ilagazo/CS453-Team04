@@ -83,7 +83,7 @@ def weakMitigation(userName, userPassword):
     #union query attack
     #additional statement attack
     #comment attack
-    return 1
+    print(genQuery(userName, userPassword))
 
 # PART 04: Strong Mitigation
 # Create a function to provide a strong mitigation against all command injection attacks. Provide the code, output showing
@@ -95,8 +95,8 @@ def strongMitigation(userName, userPassword):
     #union query attack
     #additional statement attack
     #comment attack
-    return 1
-
+    print(genQuery(userName, userPassword))
+    
 def manualTest():
     userName = getUserName()
     userPassword = getUserPassword()

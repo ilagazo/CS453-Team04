@@ -105,11 +105,29 @@ def steveTest():
     return 1
 
 def camilaTest():
+    print("**\n**Camila's Test**\n**")
     #tautology attack
+    username = "admn"
+    password = "InD1o or 1=1"
+    print(f"Tautology:\n Username: {username}\n Password: {password}")
+    weakMitigation(username, password)
+    strongMitigation(username, password)
     #union query attack
+    password = "InD1o; UnION Select * "
+    print(f"Union:\n Username: {username}\n Password: {password}")
+    weakMitigation(username, password)
+    strongMitigation(username, password)
     #additional statement attack
+    password = "InD1o'; INSERT into ('ccardus','InD1o')"
+    print(f"Additional Statement:\n Username: {username}\n Password: {password}")
+    weakMitigation(username, password)
+    strongMitigation(username, password)
     #comment attack
-    return 1
+    username = "InD10';--"
+    password = "nothing"
+    print(f"Comment:\n Username: {username}\n Password: {password}")
+    weakMitigation(username, password)
+    strongMitigation(username, password)
 
 def devanTest():
     #tautology
@@ -119,25 +137,25 @@ def devanTest():
     print(f"Tautology:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
     strongMitigation(username, password)
-    # union query attack 
+    # union query attack
     username = ' UNION SELECT * FROM emp_details # '
     password = "a"
     print(f"Union:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
     strongMitigation(username, password)
-    # additional statement attack 
+    # additional statement attack
     username = ";import os; dir = '/etc/passwd'; shutil.rmtree(dir)"
     password = "justdoit"
     print(f"Additional Statement:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
     strongMitigation(username, password)
-    # comment attack 
+    # comment attack
     username = "admin#"
     password = "a"
     print(f"Comment:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
     strongMitigation(username, password)
-    
+
 
 # PART 03: Weak Mitigation
 # Create a function to provide a weak mitigation against all four attacks. This function accepts the input as a parameter
@@ -174,14 +192,14 @@ def strongMitigation(userName, userPassword):
         test = 0
     elif len(userPassword) > 20:
         print ("  Password Error! Only 20 characters allowed!")
-        test = 0 
+        test = 0
     if test == 1:
         print("  Test Passed: " + genQuery(userName, userPassword))
-    
+
 def manualTest():
     userName = getUserName()
     userPassword = getUserPassword()
-    
+
     weakMitigation(userName, userPassword)
     strongMitigation(userName, userPassword)
 
@@ -192,7 +210,7 @@ def automatedTest():
     collinTest()
     ivanroTest()
     steveTest()
-    camilaTest()    
+    camilaTest()
     devanTest()
 
 def getUserName():

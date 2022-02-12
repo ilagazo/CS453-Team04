@@ -1,5 +1,8 @@
+from ast import Or
 from hmac import compare_digest
 import platform
+import re
+
     
 # PART 01: Query Generation
 # Write a function to accept two strings (username and a password) and return a single string (SQL) representing
@@ -78,11 +81,27 @@ def camilaTest():
     #comment attack
     return 1
 
-def davanTest():
-    #tautology attack
-    #union query attack
-    #additional statement attack
-    #comment attack
+def devanTest():
+    #tautology
+    username = "Root"
+    password = 'anything or x = x' #should have parentheses around both x's and one after anything and not before anything
+    weakMitigation(username, password)
+    strongMitigation(username, password)
+    # union query attack 
+    username = ' UNION SELECT * FROM emp_details # '
+    password = "a"
+    weakMitigation(username, password)
+    strongMitigation(username, password)
+    # additional statement attack 
+    username = "";import os; dir = '/etc/passwd'; shutil.rmtree(dir)
+    password = "justdoit"
+    weakMitigation(username, password)
+    strongMitigation(username, password)
+    # comment attack 
+    username = "admin#"
+    password = "a"
+    weakMitigation(username, password)
+    strongMitigation(username, password)
     return 1
 
 # PART 03: Weak Mitigation
@@ -108,6 +127,18 @@ def strongMitigation(userName, userPassword):
     #union query attack
     #additional statement attack
     #comment attack
+    if not re.match("^[a-z]*$", userName):
+        print ("Error! Only letters a-z allowed!")
+
+    elif len(userName) > 10:
+        print ("Error! Only 15 characters allowed!")
+        
+    if not re.match("^[a-z]*$", userPassword):
+        print ("Error! Only letters a-z allowed!")
+
+    elif len(userPassword) > 10:
+        print ("Error! Only 15 characters allowed!")
+
     print(genQuery(userName, userPassword))
     
 def manualTest():
@@ -125,7 +156,7 @@ def automatedTest():
     ivanroTest()
     steveTest()
     camilaTest()    
-    davanTest()
+    devanTest()
 
 def getUserName():
     print("Please enter username: ")

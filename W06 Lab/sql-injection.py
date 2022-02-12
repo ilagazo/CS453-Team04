@@ -30,36 +30,66 @@ def genQuery(username, password):
 # the query function, and justification in the lab report.
 
 def testValid():
+    print("******************************\n**********Valid Test**********\n******************************")
+    #test1 = ["This1sAu5ern4me", "This1sAp455w0rd"]
     test1 = ["This_1s_A_u5ern4me", "This_1s_A_p455w0rd"]
-
-    print(f"Test 1:\n Username: {test1[0]}\n Password: {test1[1]}")
-    print(genQuery(test1[0], test1[1]))
+    print(f"Test Valid:\n Username: {test1[0]}\n Password: {test1[1]}")
+    weakMitigation(test1[0], test1[1])
+    strongMitigation(test1[0], test1[1])
 
 def shaunTest():
+    print("*********************************\n**********Shaun's Tests**********\n*********************************")
     #tautology attack
+    username = "scrook"
+    password = "pass or 1=1"
+    print(f"Tautology:\n Username: {username}\n Password: {password}")
+    weakMitigation(username, password)
+    strongMitigation(username, password)
     #union query attack
+    password = "pass; UNION all Select * from passwordlist"
+    print(f"Union:\n Username: {username}\n Password: {password}")
+    weakMitigation(username, password)
+    strongMitigation(username, password)
     #additional statement attack
+    password = "pass'; INSERT into ('bill','pass')"
+    print(f"Additional Statement:\n Username: {username}\n Password: {password}")
+    weakMitigation(username, password)
+    strongMitigation(username, password)
     #comment attack
-    return 1
+    username = "pass';--"
+    password = "lol don't need this suckers"
+    print(f"Comment:\n Username: {username}\n Password: {password}")
+    weakMitigation(username, password)
+    strongMitigation(username, password)
+
 
 def collinTest():
+    print("*******************************\n**********Collin Test**********\n*******************************")
     # tautology attack 
     username = "collinbrown32"
     password = "anything or x=x"
+    print(f"Tautology:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
-    # union query attack 
+    strongMitigation(username, password)
+    #union query attack
     username = "collinbrown32"
     password = "UNION DROP TABLE table1;"
+    print(f"Union:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
-    # additional statement attack 
+    strongMitigation(username, password)
+    #additional statement attack
     username = "collinbrown32;DROP TABLE table1;"
     password = "trt334"
+    print(f"Additional Statement:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
-    # comment attack 
+    strongMitigation(username, password)
+    #comment attack
     username = "collinbrown32#"
     password = "DROP TABLE table1;"
+    print(f"Comment:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
-    return 1 
+    strongMitigation(username, password)
+    
 def ivanroTest():
     #tautology attack
     #union query attack
@@ -83,26 +113,31 @@ def camilaTest():
 
 def devanTest():
     #tautology
+    print("*********************************\n**********Devan's Tests**********\n*********************************")
     username = "Root"
     password = 'anything or x = x' #should have parentheses around both x's and one after anything and not before anything
+    print(f"Tautology:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
     strongMitigation(username, password)
     # union query attack 
     username = ' UNION SELECT * FROM emp_details # '
     password = "a"
+    print(f"Union:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
     strongMitigation(username, password)
     # additional statement attack 
-    username = "";import os; dir = '/etc/passwd'; shutil.rmtree(dir)
+    username = ";import os; dir = '/etc/passwd'; shutil.rmtree(dir)"
     password = "justdoit"
+    print(f"Additional Statement:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
     strongMitigation(username, password)
     # comment attack 
     username = "admin#"
     password = "a"
+    print(f"Comment:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
     strongMitigation(username, password)
-    return 1
+    
 
 # PART 03: Weak Mitigation
 # Create a function to provide a weak mitigation against all four attacks. This function accepts the input as a parameter
@@ -110,12 +145,15 @@ def devanTest():
 # and justification that the code represents a weak mitigation to the four attack types.
 
 def weakMitigation(userName, userPassword):
-    forbidden = ["OR", "or", "AND", "and", "=", "UNION", "union", ";", "/", "#", "@", "$", "~"] #List of dangerous characters
+    forbidden = ["OR", "AND", "=", "UNION", ";", "/", "#", "@", "$", "~","'","\""] #List of dangerous characters
+    test = 1
+    print("Weak Mitigation")
     for i in forbidden:
-        if(i in userName or i in userPassword):
-            print(f"Invalid input from user {userName}, use of {i} not permitted.") #Loops through user input, checking for the forbidden characters. If found, prints "Invalid"
-
-    print(genQuery(userName, userPassword))
+        if(i in userName.upper() or i in userPassword.upper()):
+            print(f"  Invalid input from user {userName}, use of {i} not permitted.") #Loops through user input, checking for the forbidden characters. If found, prints "Invalid"
+            test = 0
+    if test == 1:
+        print("  Test passed: " + genQuery(userName, userPassword))
 
 # PART 04: Strong Mitigation
 # Create a function to provide a strong mitigation against all command injection attacks. Provide the code, output showing
@@ -123,23 +161,22 @@ def weakMitigation(userName, userPassword):
 # the approach works the way one would expect.
 
 def strongMitigation(userName, userPassword):
-    #tautology attack
-    #union query attack
-    #additional statement attack
-    #comment attack
-    if not re.match("^[a-z]*$", userName):
-        print ("Error! Only letters a-z allowed!")
-
-    elif len(userName) > 10:
-        print ("Error! Only 15 characters allowed!")
-        
-    if not re.match("^[a-z]*$", userPassword):
-        print ("Error! Only letters a-z allowed!")
-
-    elif len(userPassword) > 10:
-        print ("Error! Only 15 characters allowed!")
-
-    print(genQuery(userName, userPassword))
+    test = 1
+    print("Strong Mitigation")
+    if not re.match("^[A-Za-z0-9_-]*$", userName):
+        print ("  User Name Error! Only letters and numbers allowed!")
+        test = 0
+    elif len(userName) > 20:
+        print ("  User Name Error! Only 20 characters allowed!")
+        test = 0
+    elif not re.match("^[A-Za-z0-9_-]*$", userPassword):
+        print ("  Password Error! Only letters and numbers allowed!")
+        test = 0
+    elif len(userPassword) > 20:
+        print ("  Password Error! Only 20 characters allowed!")
+        test = 0 
+    if test == 1:
+        print("  Test Passed: " + genQuery(userName, userPassword))
     
 def manualTest():
     userName = getUserName()

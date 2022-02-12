@@ -3,7 +3,6 @@ from hmac import compare_digest
 import platform
 import re
 
-    
 # PART 01: Query Generation
 # Write a function to accept two strings (username and a password) and return a single string (SQL) representing
 # the query used to determine if a user is authenticated on a given system. The query will be similar to one
@@ -17,7 +16,6 @@ import re
 
 def genQuery(username, password):
     sqlQuery = (f"SELECT authenticate FROM passwordList WHERE name='{username}' and passwd='{password}';")
-#    print(f" SQL Query: {sqlQuery}\n")
     return sqlQuery
 
 # PART 02: Vulnerabilities
@@ -31,11 +29,11 @@ def genQuery(username, password):
 
 def testValid():
     print("******************************\n**********Valid Test**********\n******************************")
-    #test1 = ["This1sAu5ern4me", "This1sAp455w0rd"]
-    test1 = ["This_1s_A_u5ern4me", "This_1s_A_p455w0rd"]
-    print(f"Test Valid:\n Username: {test1[0]}\n Password: {test1[1]}")
-    weakMitigation(test1[0], test1[1])
-    strongMitigation(test1[0], test1[1])
+    test = ["This_1s_A_u5ern4me", "This_1s_A_p455w0rd"]
+    print(f"Test Valid:\n Username: {test[0]}\n Password: {test2[1]}")
+    genQuery(test[0], test[1])
+    weakMitigation(test[0], test[1])
+    strongMitigation(test[0], test[1])
 
 def shaunTest():
     print("*********************************\n**********Shaun's Tests**********\n*********************************")
@@ -65,7 +63,7 @@ def shaunTest():
 
 def collinTest():
     print("*******************************\n**********Collin Test**********\n*******************************")
-    # tautology attack 
+    # tautology attack
     username = "collinbrown32"
     password = "anything or x=x"
     print(f"Tautology:\n Username: {username}\n Password: {password}")
@@ -89,13 +87,33 @@ def collinTest():
     print(f"Comment:\n Username: {username}\n Password: {password}")
     weakMitigation(username, password)
     strongMitigation(username, password)
-    
+
 def ivanroTest():
-    #tautology attack
-    #union query attack
-    #additional statement attack
-    #comment attack
-    return 1
+    print("*******************************\n**********Ivanro's Test**********\n*******************************")
+    # tautology attack
+    username = 'null'
+    password = 'null'
+    print(f"Tautology:\n Username: {username}\n Password: {password}")
+    weakMitigation(username, password)
+    strongMitigation(username, password)
+    # union query attack
+    username = 'UNION SELECT * FROM pw_list'
+    password = '_'
+    print(f"Union:\n Username: {username}\n Password: {password}")
+    weakMitigation(username, password)
+    strongMitigation(username, password)
+    # additional statement attack
+    username = "; DELETE pw_list"
+    password = "null"
+    print(f"Additional Statement:\n Username: {username}\n Password: {password}")
+    weakMitigation(username, password)
+    strongMitigation(username, password)
+    # comment attack
+    username = "#"
+    password = "#"
+    print(f"Comment:\n Username: {username}\n Password: {password}")
+    weakMitigation(username, password)
+    strongMitigation(username, password)
 
 def steveTest():
     #tautology attack
@@ -105,8 +123,7 @@ def steveTest():
     return 1
 
 def camilaTest():
-    print("**\n**Camila's Test**\n**")
-    #tautology attack
+    print("*******************************\n**********Camila's Test**********\n*******************************")    #tautology attack
     username = "admn"
     password = "InD1o or 1=1"
     print(f"Tautology:\n Username: {username}\n Password: {password}")
@@ -212,6 +229,7 @@ def automatedTest():
     steveTest()
     camilaTest()
     devanTest()
+    print('\n')
 
 def getUserName():
     print("Please enter username: ")
@@ -238,7 +256,7 @@ def main():
             print("SQL Injection Program Ended. Goodbye!")
         else:
             option = '0'
-            print("Invalid Input! Please select a valid input (i.e. 1,2,3")
+            print("Invalid Input! Please select a valid input (i.e. 1,2,3)")
 
 #  Run Main
 main();

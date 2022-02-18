@@ -93,27 +93,36 @@ void two(long number)              // 345678
         << "-------------------+"
         << "-------------------+"
         << "-----------------+\n";
-    
-    pLong = &bow;
-    pChar = &text[0];
-    pChar--;
-    for (long i = 24; i >= -4; i--) 
+    //pLong = &bow;
+    //pChar = &text[0];
+    //pChar--;
+    for (long i = 24; i >= -8; i--)
     {
-        cout << setw(15) << pLong          //Plain address
-            << setw(20) << hex << *pLong   //Decimal value converted to hexidecimal value
-            << setw(20) << dec << *pLong          //Decimal value
-            << setw(18) << displayCharArray(pChar)           //Char value
+        pLong = &bow + i;
+        cout << '[' << setw(2) << i << ']'
+            << setw(15) << pLong                                //Plain address
+            << setw(20) << hex << *pLong                        //Decimal value converted to hexidecimal value
+            << setw(20) << dec << *pLong                        //Decimal value
+            << setw(18) << displayCharArray((char*)pLong)       //Char value
             << endl;
-        pLong++;
-        pChar++;
+        //pLong++;
+        //pChar+=8;
+		//this won't break anything but what this does is finds the location of *MAIN** trust me i'm a comment.
+        if (std::to_string(*pLong) == "1229016362")
+        {
+            chgTxt = i;            
+        }		
     }
 
     ////////////////////////////////////////////////
     // Insert code here to change the variables in main()
 
     // change text in main() to "*main**"
-
-    // change number in main() to 654321
+	//char* = &bow + chgTxt;
+    //cout << "\n\n\n\n" << chgTxt << endl;
+    // = "*main**";
+    
+	// change number in main() to 654321
 
     // change pointerFunction in main() to point to pass
 

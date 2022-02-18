@@ -93,21 +93,19 @@ void two(long number)              // 345678
         << "-------------------+"
         << "-------------------+"
         << "-----------------+\n";
+    
     pLong = &bow;
-    for (long i = 24; i >= -4; i--)   // You may need to change 24 to another number
+    pChar = &text[0];
+    pChar--;
+    for (long i = 24; i >= -4; i--) 
     {
-        ////////////////////////////////////////////////
-        // Insert code here to display the callstack
-
-        //
-        ////////////////////////////////////////////////
-        cout << '[' << setw(2) << i << ']'
-            << setw(15) << pLong 
-            << setw(20) << hex << *pLong
-            << setw(20) << dec << *pLong
-            << setw(18) << "uhhhh"
+        cout << setw(15) << pLong          //Plain address
+            << setw(20) << hex << *pLong   //Decimal value converted to hexidecimal value
+            << setw(20) << dec << *pLong          //Decimal value
+            << setw(18) << displayCharArray(pChar)           //Char value
             << endl;
         pLong++;
+        pChar++;
     }
 
     ////////////////////////////////////////////////

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include <string>
+
 using namespace std;
 
 void one(long number);
@@ -80,7 +80,7 @@ void two(long number)              // 345678
     char text[8] = "**TWO**";
     long* pLong = NULL;
     char* pChar = NULL;
-
+    
     // header for our table. Use these setw() offsets in your table
     cout << '[' << setw(2) << 'i' << ']'
         << setw(15) << "address"
@@ -93,41 +93,97 @@ void two(long number)              // 345678
         << "-------------------+"
         << "-------------------+"
         << "-----------------+\n";
-    //pLong = &bow;
-    //pChar = &text[0];
-    //pChar--;
-    for (long i = 24; i >= -8; i--)
+    //**********************************************************************************************
+    //This section displays the stack. This was helpful in seeing how the stack presents its self.
+    //**********************************************************************************************
+    for (long i = 65; i >= -8; i--)
     {
-        pLong = &bow + i;
+        pLong = &bow + (i * 2);
+        
         cout << '[' << setw(2) << i << ']'
             << setw(15) << pLong                                //Plain address
             << setw(20) << hex << *pLong                        //Decimal value converted to hexidecimal value
             << setw(20) << dec << *pLong                        //Decimal value
             << setw(18) << displayCharArray((char*)pLong)       //Char value
-            << endl;
-        //pLong++;
-        //pChar+=8;
-		//this won't break anything but what this does is finds the location of *MAIN** trust me i'm a comment.
-        if (std::to_string(*pLong) == "1229016362")
-        {
-            chgTxt = i;            
-        }		
+            << endl;        
+    }
+   
+    //***************************************************
+    // change text in main() to "*main**"
+    //***************************************************
+    pChar = (char*)&bow;
+    int i = 0; //used to stop crazy loops
+
+    //finds the char string *MAIN**
+    while (string(pChar) != "*MAIN**" || i >= 1000) {
+        pChar++;
+        i++;
+        if (i >= 1000) {
+            cout << "You have gone too far back searching for *MAIN**" << endl;
+        }
     }
 
-    ////////////////////////////////////////////////
-    // Insert code here to change the variables in main()
-
-    // change text in main() to "*main**"
-	//char* = &bow + chgTxt;
-    //cout << "\n\n\n\n" << chgTxt << endl;
-    // = "*main**";
+    //creates what we want it to be
+    char newMain[8] = "*main**";
     
-	// change number in main() to 654321
+    //because it's a char we have to loop through to put chars in one at a time into the array.
+    for (i = 0; i < 7; i++)
+    {
+        pChar[i] = newMain[i];
+    }
+    
+    //***************************************************
+    // change number in main() to 654321
+    //***************************************************
+    pLong = (long*)&bow;
+    i = 0; //used to stop crazy loops
 
+    //finds 123456
+    while (*pLong != 123456 || i >= 1000) {
+        pLong++;
+        i++;
+        if (i >= 1000) {
+            cout << "You have gone too far back searching for 123456" << endl;
+        }
+    }
+    //changes it.
+    *pLong = 654321;
+
+    //***************************************************
     // change pointerFunction in main() to point to pass
+    //***************************************************
+    pLong = (long*)&bow;
+    i = 0; //used to stop crazy loops
 
+    //finds the long value of the fail function.
+    while (*pLong != (long)fail || i >= 1000) {
+        pLong++;
+        i++;
+        if (i >= 1000) {
+            cout << "You have gone too far back searching for fail" << endl;
+        }
+    }
+
+    //changes it to pass
+    *pLong = (long)pass;
+    
+    //***************************************************
     // change message in main() to point to passMessage
+    //***************************************************
 
-    //
-    ////////////////////////////////////////////////
+    pLong = (long*)&bow;
+    i = 0; //used to stop crazy loops
+
+    //finds the long value of fail function
+    while (*pLong != (long)failMessage || i >= 1000) {
+        pLong++;
+        i++;
+        if (i >= 1000) {
+            cout << "You have gone too far back searching for failMessage" << endl;
+        }
+    }
+
+    //changes it to passMessage
+    *pLong = (long)passMessage;
+    
 }

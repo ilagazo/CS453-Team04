@@ -81,9 +81,9 @@ void two(long number)              // 345678
     long* pLong = NULL;
     char* pChar = NULL;
     
-    cout << "Code: " << endl;
-    cout << "Stack: " << endl;
-    cout << "Heap: " << endl;
+    cout << "Code: " << main << endl;
+    cout << "Stack: " << &text << endl;
+    cout << "Heap: " << &pLong << endl;
     
     // header for our table. Use these setw() offsets in your table
     cout << '[' << setw(2) << 'i' << ']'

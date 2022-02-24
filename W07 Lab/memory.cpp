@@ -80,11 +80,7 @@ void two(long number)              // 345678
     char text[8] = "**TWO**";
     long* pLong = NULL;
     char* pChar = NULL;
-    
-    cout << "Code: " << main << endl;
-    cout << "Stack: " << &text << endl;
-    cout << "Heap: " << &pLong << endl;
-    
+
     // header for our table. Use these setw() offsets in your table
     cout << '[' << setw(2) << 'i' << ']'
         << setw(15) << "address"
@@ -103,15 +99,15 @@ void two(long number)              // 345678
     for (long i = 65; i >= -8; i--)
     {
         pLong = &bow + (i * 2);
-        
+
         cout << '[' << setw(2) << i << ']'
             << setw(15) << pLong                                //Plain address
             << setw(20) << hex << *pLong                        //Decimal value converted to hexidecimal value
             << setw(20) << dec << *pLong                        //Decimal value
             << setw(18) << displayCharArray((char*)pLong)       //Char value
-            << endl;        
+            << endl;
     }
-   
+    
     //***************************************************
     // change text in main() to "*main**"
     //***************************************************
@@ -129,13 +125,13 @@ void two(long number)              // 345678
 
     //creates what we want it to be
     char newMain[8] = "*main**";
-    
+
     //because it's a char we have to loop through to put chars in one at a time into the array.
     for (i = 0; i < 7; i++)
     {
         pChar[i] = newMain[i];
     }
-    
+
     //***************************************************
     // change number in main() to 654321
     //***************************************************
@@ -170,7 +166,7 @@ void two(long number)              // 345678
 
     //changes it to pass
     *pLong = (long)pass;
-    
+
     //***************************************************
     // change message in main() to point to passMessage
     //***************************************************
@@ -190,4 +186,8 @@ void two(long number)              // 345678
     //changes it to passMessage
     *pLong = (long)passMessage;
     
+    //displays addresses for examples of where the code is stored where the stack is stored and where the heap is stored in memory.
+    cout << "Code:  " << main << endl;
+    cout << "Stack: " << &text << endl;
+    cout << "Heap:  " << pLong << endl;
 }

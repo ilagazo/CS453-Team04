@@ -7,15 +7,43 @@
 #    This class stores the notion of Bell-LaPadula
 ########################################################################
 
-def check_auth(user_auth, message_auth):
-    conditions = ["Secret",  "Privileged", "Confidential", "Public"]
-    try: 
-        user_index = conditions.index(user_auth)
-        message_index = conditions.index(message_auth)
-    except:
-        print("Not a valid security clearance.")
+#def check_auth(user_auth, message_auth):
+#    conditions = ["Secret",  "Privileged", "Confidential", "Public"]
+#    try: 
+#        user_index = conditions.index(user_auth)
+#        message_index = conditions.index(message_auth)
+#    except:
+#        print("Not a valid security clearance.")
+#
+#    if(user_index >= message_index):
+#        return True
+#    else:
+#        return False
+#from enum import Enum 
 
-    if(user_index >= message_index):
-        return True
-    else:
-        return False
+#class Control(Enum):
+#control = Enum("PUBLIC", "CONFIDENTIAL","PRIVILEGED", "SECRET")
+PUBLIC       = 1
+CONFIDENTIAL = 2 
+SECRET       = 3
+PRIVILEGED   = 4 #this is not in the book. I am puting it 4 like it was TOP_SECRET
+
+Control = {
+            "PUBLIC"        : PUBLIC
+           ,"CONFIDENTIAL"  : CONFIDENTIAL
+           ,"PRIVILEGED"    : PRIVILEGED
+           ,"SECRET"        : SECRET }
+
+def getControlLevel(controlUser):
+  if(type(controlUser) == int):
+    return controlUser
+  return Control[controlUser.upper()]
+
+def compareControlLevel(control, controlUser):
+  return getControlLevel(controlUser) >= control
+
+def getWriteControlLevel(control, controlUser):
+  return compareControlLevel(control, controlUser)
+
+def getReadControlLevel(control, controlUser):
+  return compareControlLevel(control, controlUser)

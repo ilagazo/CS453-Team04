@@ -7,4 +7,15 @@
 #    This class stores the notion of Bell-LaPadula
 ########################################################################
 
-# you may need to put something here...
+def check_auth(user_auth, message_auth):
+    conditions = ["Secret",  "Privileged", "Confidential", "Public"]
+    try: 
+        user_index = conditions.index(user_auth)
+        message_index = conditions.index(message_auth)
+    except:
+        print("Not a valid security clearance.")
+
+    if(user_index >= message_index):
+        return True
+    else:
+        return False

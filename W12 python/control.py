@@ -40,11 +40,8 @@ def getControlLevel(controlUser):
   elif (type(controlUser) == str):
     return Control[controlUser.upper()]
 
-def compareControlLevel(control, controlUser):
-  return getControlLevel(controlUser) >= control
-
 def getWriteControlLevel(control, controlUser):
-  return compareControlLevel(control, controlUser)
+  return controlUser <= control
 
 def getReadControlLevel(control, controlUser):
-  return compareControlLevel(control, controlUser)
+  return controlUser >= control

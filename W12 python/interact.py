@@ -23,6 +23,7 @@ userlist = [
    [ "AdmiralAbe",     "password", "Secret"         ],  
    [ "CaptainCharlie", "password", "Privileged"     ], 
    [ "SeamanSam",      "password", "Confidential"   ],
+   [ "a",              "password", "Confidential"   ],
    [ "SeamanSue",      "password", "Confidential"   ],
    [ "SeamanSly",      "password", "Confidential"   ]
 ]
@@ -118,6 +119,8 @@ class Interact:
     ################################################## 
     def _authenticate(self, username, password):
         id_ = self._id_from_user(username)
+        if (ID_INVALID != id_ and password == users[id_].password):
+            return users[id_].control
         return ID_INVALID != id_ and password == users[id_].password
 
     ##################################################

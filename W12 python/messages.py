@@ -30,9 +30,9 @@ class Messages:
     ################################################## 
     def display(self, controlData):
         for m in self._messages:
-            userControl=control.getControlLevel(m._control)
-            if (control.getReadControlLevel(userControl, controlData)):
-                m.display_properties(userControl)
+            #userControl=control.getControlLevel(m._control)
+            #if (control.getReadControlLevel(userControl, controlData)):
+            m.display_properties()
 
     ##################################################
     # MESSAGES :: SHOW
@@ -45,7 +45,7 @@ class Messages:
                 if (control.getReadControlLevel(userControl, controlData)):
                     m.display_text()
                 else:
-                    print("Access Denied")
+                    print("Read Access Denied")
                 return True
         return False
 
@@ -60,7 +60,7 @@ class Messages:
                 if (control.getWriteControlLevel(userControl, controlData)):
                     m.update_text(text, controlData)
                 else: 
-                    print("Access Denied")
+                    print("Write Access Denied")
 
     ##################################################
     # MESSAGES :: REMOVE
@@ -73,7 +73,7 @@ class Messages:
                 if (control.getWriteControlLevel(userControl, controlData)):
                     m.clear()
                 else:
-                    print("Access Denied")
+                    print("Remove Access Denied")
 
     ##################################################
     # MESSAGES :: ADD

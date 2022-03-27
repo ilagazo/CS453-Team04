@@ -55,23 +55,27 @@ def session(messages):
     username = simple_prompt("\nWhat is your username? ")
     password = simple_prompt("What is your password? ")
 
-    interact_ = interact.Interact(username, password, messages)
-    print(f"\nWelcome, {username}. Please select an option:\n")
-    display_options()
+    if(password != 'password'):
+        print('INVALID PASSWORD!')
+        close_session()
+    else:
+        interact_ = interact.Interact(username, password, messages)
+        print(f"\nWelcome, {username}. Please select an option:\n")
+        display_options()
 
-    options = {
-        "o": "print('Options:'); display_options();",
-        "d": "interact_.display();",
-        "s": "interact_.show();",
-        "a": "interact_.add();",
-        "u": "interact_.update();",
-        "r": "interact_.remove();",
-        "l": "print(f'Goodbye, {username}{chr(10)}'); close_session();"
-    }
+        options = {
+            "o": "print('Options:'); display_options();",
+            "d": "interact_.display();",
+            "s": "interact_.show();",
+            "a": "interact_.add();",
+            "u": "interact_.update();",
+            "r": "interact_.remove();",
+            "l": "print(f'Goodbye, {username}{chr(10)}'); close_session();"
+        }
 
-    while session_open:
-        option = input(f"{username}> ")
-        exec(options.get(option, "print(f\"Unknown option: \'{option}\'\");"))
+        while session_open:
+            option = input(f"{username}> ")
+            exec(options.get(option, "print(f\"Unknown option: \'{option}\'\");"))
 
 ####################################################
 # MAIN

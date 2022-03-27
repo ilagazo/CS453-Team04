@@ -37,7 +37,8 @@ Control = {
 def getControlLevel(controlUser):
   if(type(controlUser) == int):
     return controlUser
-  return Control[controlUser.upper()]
+  elif (type(controlUser) == str):
+    return Control[controlUser.upper()]
 
 def compareControlLevel(control, controlUser):
   return getControlLevel(controlUser) >= control

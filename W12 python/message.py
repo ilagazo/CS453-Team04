@@ -56,14 +56,10 @@ class Message:
     # Display the attributes/properties but not the
     # content of this message
     ##################################################  
-    def display_properties(self, controlData):
+    def display_properties(self):
         if self._empty:
             return
-        userControl = control.getControlLevel(self._control)
-        if(control.getReadControlLevel(userControl, controlData)):
-            print(f"\t[{self._id}] Message from {self._author} at {self._date}")
-        else:
-            print("Access Denied")
+        print(f"\t[{self._id}] Message from {self._author} at {self._date}")
 
     ##################################################
     # MESSAGE :: DISPLAY TEXT

@@ -2,7 +2,7 @@
 # COMPONENT:
 #    CIPHER01
 # Author:
-#    Br. Helfrich, Kyle Mueller, <your name here if you made a change>
+#    Br. Helfrich, Kyle Mueller
 # Summary:
 #    Implement your cipher here. You can view 'example.py' to see the
 #    completed Caesar Cipher example.
@@ -22,7 +22,8 @@ class Cipher:
         return "Ivanro Lagazo"
 
     def get_cipher_name(self):
-        return "Vigenère Cipher"
+        return "Vigenère Cipher\n"\
+                "PLEASE NOTE THAT THIS CIPHER ONLY WORKS WITH UPPERCASE TEXT AND PASSWORDS"
 
     ##########################################################################
     # GET CIPHER CITATION
@@ -63,8 +64,8 @@ class Cipher:
         return pc
 
     ##########################################################################
-    # ENCRYPT
-    # TODO: ADD description
+    # GETKEY
+    # Ensures that the key provided is the same length as the message provided
     ##########################################################################
     def getKey(self, key, plainText):
         key = list(key)
@@ -76,26 +77,49 @@ class Cipher:
                 key.append(key[i % len(key)])
             return ("" . join(key))
 
+    ##########################################################################
+    # ENCRYPT
+    # Encrypts the text provided using the password as a key
+    ##########################################################################
     def encrypt(self, plainText, key):
-        ciphertext = []
+        if(self.validateInput(plainText, key)):
+            ciphertext = []
 
-        for i in range(len(plainText)):
-            cipherLetter = (ord(plainText[i]) +
-                            ord(key[i])) % self.alphabetSize
-            cipherLetter += ord('A')
-            ciphertext.append(chr(cipherLetter))
+            for i in range(len(plainText)):
+                cipherLetter = (ord(plainText[i]) +
+                                ord(key[i])) % self.alphabetSize
+                cipherLetter += ord('A')
+                ciphertext.append(chr(cipherLetter))
 
-        return ("" . join(ciphertext))
+            return ("" . join(ciphertext))
+        else:
+            return 'ERROR: PASSWORD ENTERED MUST BE ALL UPPERCASE LETTERS ONLY'
 
     ##########################################################################
     # DECRYPT
-    # TODO: ADD description
+    # Decrypts the text using the cipher created from encryption and the
+    # provided password
     ##########################################################################
     def decrypt(self, cipherText, key):
-        decryptedCipher = []
+        if(self.validateInput(cipherText, key)):
+            decryptedCipher = []
 
-        for i in range((len(cipherText))):
-            decryptedLetter = (ord(cipherText[i]) - ord(key[i]) + self.alphabetSize) % self.alphabetSize
-            decryptedLetter += ord('A')
-            decryptedCipher.append(chr(decryptedLetter))
-        return ("" . join(decryptedCipher))
+            for i in range((len(cipherText))):
+                decryptedLetter = (ord(cipherText[i]) - ord(key[i]) + self.alphabetSize) % self.alphabetSize
+                decryptedLetter += ord('A')
+                decryptedCipher.append(chr(decryptedLetter))
+            return ("" . join(decryptedCipher))
+        else:
+            return 'ERROR: PASSWORD ENTERED MUST BE ALL UPPERCASE LETTERS ONLY'
+
+
+    ##########################################################################
+    # VALIDATEINPUT
+    # Vigenère Cipher only works with capital letters so this function ensures
+    # that the provided inputs are capital letters only
+    ##########################################################################
+    def validateInput(self,text, password):
+        if text.isalpha() and password.isalpha() and text.isupper():
+            return True
+        else:
+            return False

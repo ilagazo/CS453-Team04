@@ -84,7 +84,7 @@ class Cipher:
     def encrypt(self, plainText, key):
         if(self.validateInput(plainText, key)):
             ciphertext = []
-
+            plainText = self.convertInput(plainText)
             for i in range(len(plainText)):
                 cipherLetter = (ord(plainText[i]) +
                                 ord(key[i])) % self.alphabetSize
@@ -93,7 +93,7 @@ class Cipher:
 
             return ("" . join(ciphertext))
         else:
-            return 'ERROR: PASSWORD ENTERED MUST BE ALL UPPERCASE LETTERS ONLY'
+            return 'ERROR: TEXT AND/OR PASSWORD ENTERED MUST BE ALL UPPERCASE LETTERS ONLY'
 
     ##########################################################################
     # DECRYPT
@@ -110,16 +110,29 @@ class Cipher:
                 decryptedCipher.append(chr(decryptedLetter))
             return ("" . join(decryptedCipher))
         else:
-            return 'ERROR: PASSWORD ENTERED MUST BE ALL UPPERCASE LETTERS ONLY'
+            return 'ERROR: TEXT AND/OR PASSWORD ENTERED MUST BE ALL UPPERCASE LETTERS ONLY'
 
 
     ##########################################################################
     # VALIDATEINPUT
     # Vigenère Cipher only works with capital letters so this function ensures
-    # that the provided inputs are capital letters only
+    # that the provided inputs are capital letters only through validation
     ##########################################################################
     def validateInput(self,text, password):
-        if text.isalpha() and password.isalpha() and text.isupper():
+        text =  self.convertInput(text)
+        password = self.convertInput(password)
+        if text.isalpha() and password.isalpha():
             return True
         else:
             return False
+
+    ##########################################################################
+    # CONVERTINPUT
+    # Vigenère Cipher only works with capital letters so this function ensures
+    # that the provided inputs are capital letters only through conversion
+    ##########################################################################
+    def convertInput(self,string):
+        # REMOVE SPACES
+        newString = string.replace(' ', '').upper()
+        print(newString)
+        return newString
